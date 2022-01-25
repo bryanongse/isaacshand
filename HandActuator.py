@@ -8,6 +8,19 @@ import math
 wCam, hCam = 640, 480
 ###############################
 
+def thumbAngle(lmList):
+    """
+    :param lmList:
+    :return: Approximate distance
+    """
+
+    thumb = lmList[3]
+    check = lmList[5]
+
+    distance = check[1] - thumb[1]
+
+    return distance
+
 cap = cv.VideoCapture(0)
 cap.set(3, wCam)
 cap.set(4, hCam)
@@ -27,10 +40,11 @@ while True:
 
     if len(lmList):
         fingers = []
-        distance =  lmList[tipIds[1]-3][2] - lmList[tipIds[1]][2]
-        indexFinger = np.interp(distance, [0, 130], [0, 100])
+
         
         print(indexFinger)
+
+        thumbAngle(lmList)
         
         # Other four fingers
         # for id in range(1, 5):
